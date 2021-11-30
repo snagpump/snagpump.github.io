@@ -1,9 +1,60 @@
 <html>
-  <head>
-    <title>snagpump</title>
-    <meta charset="utf-8">
-  </head>
-  <body>
-    Хэй.
-  </body>
+    <head>
+      <title>snagpump</title>
+      <meta charset="utf-8">
+      <script src="https://cdn.jsdelivr.net/npm/p5@1.4.0/lib/p5.js"></script>
+      <script src="https://freshfork.github.io/p5.EasyCam/p5.easycam.js"></script>
+      <script src="https://raw.githubusercontent.com/FreddieRa/p5.3D/master/p5.3D.js"></script>
+      <script language="javascript" src="/src/p53D.js"></script>
+    </head>
+    <body>
+      <script>
+        let w = window.innerWidth;
+        let h = window.innerHeight;
+
+        function setup() {
+          createCanvas(w, h, WEBGL);
+          angleMode(DEGREES);
+          //cam = createEasyCam();
+          //normalMaterial();
+        }
+
+        function draw() {
+          background(millis()/1000, millis()/500, millis()/300);
+          //normalMaterial();
+
+          //rotateX(frameCount / 10);
+
+          noFill();
+
+          //stroke(255);
+
+          for (var i = 0; i < 200; i++ ) {
+            var R = map(sin(frameCount), -1, 1, 0, 255);
+            var G = map(i, 0, 20, 8, 255);
+            var B = map(cos(frameCount), -1, 1, 255, 0);
+
+            stroke(R, G, B);
+
+            beginShape();
+            for (var j = 0; j < 360; j += 15) {
+              var rad = i * 8;
+              var x = rad * cos(j);
+              var y = rad * sin(j);
+              var z = sin(frameCount + i * 10) * 50;
+
+              vertex(x, y, z);
+            }
+            endShape(CLOSE);
+          }
+        }
+
+        function windowResized() {
+          resizeCanvas(windowWidth, windowHeight);
+        }
+      </script>
+    </body>
+    <style>
+      body { margin:0; overflow:hidden }
+    </style>
 </html
